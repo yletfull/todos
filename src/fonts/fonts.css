@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "NerkoOne"; 
+    src: url("./NerkoOne-Regular.ttf") format("ttf"); 
+    font-style: normal; 
+    font-weight: normal; 
+} 
+@font-face {
+    font-family: "Oswald-ExtraLight"; 
+    src: url("./Oswald-ExtraLight.ttf") format("ttf"); 
+    font-style: normal; 
+    font-weight: normal; 
+} 
