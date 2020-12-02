@@ -7,16 +7,20 @@ import React, { useEffect, useState, useContext } from 'react';
 import './popup.css';
 import propTypes from 'prop-types';
 import TodosContext from '../../contexts/todos/TodosContext';
+import PopupContext from '../../contexts/popup/PopupContext';
 
 const Popup = (props) => {
   const {
-    isOpen, popupName = 'addTodo', setPopupState, blockBackground = true, todoText = '', date,
+    isOpen, popupName = 'addTodo', blockBackground = true, todoText = '', todoDate = new Date(),
   } = props;
 
+  const setPopupState = React.useContext(PopupContext);
+
   const [inputsState, setInputsState] = useState({
-    todoText: '',
-    todoDate: '',
+    todoText,
+    todoDate,
   });
+
   const [inputErrorsState, setInputErrorsState] = useState({
     todoTextError: false,
     todoDateError: false,
@@ -58,11 +62,7 @@ const Popup = (props) => {
       case 'todoDate':
         if (e.target.value.length >= 1) {
           setValidFields('todoDate',
-            new Date(e.target.value).toLocaleString('ru', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            }));
+            new Date(e.target.value));
         }
         if (e.target.value.length < 1) { setValidFields('todoDate', false); }
         break;
@@ -133,14 +133,14 @@ const Popup = (props) => {
 
         {popupName === 'editTodo' && (
         <div className="popup__content">
-          <h2 className="popup__title">Добавить заметку</h2>
+          <h2 className="popup__title">Изменить заметку</h2>
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
             <p className="popup__input-descriptor">Текст заметки</p>
             <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={todoText} />
             {!inputErrorsState.todoTextError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
-            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={date && date} />
+            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={todoDate && todoDate} />
             {!inputErrorsState.todoDateError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
             <button type="button" className={entryButtonState.entryButton ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Изменить</button>
           </form>
@@ -154,11 +154,9 @@ const Popup = (props) => {
 
 Popup.propTypes = {
   isOpen: propTypes.bool.isRequired,
-  setPopupState: propTypes.func.isRequired,
   blockBackground: propTypes.bool.isRequired,
   popupName: propTypes.string,
   todoText: propTypes.string,
-  date: propTypes.string,
+  todoDate: propTypes.instanceOf(Date),
 };
-
 export default Popup;

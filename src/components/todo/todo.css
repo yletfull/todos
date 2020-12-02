@@ -71,6 +71,7 @@
 .todo-list__remove-btn{
     margin: 10px 5px 0;
     color: #e92727;
+    width: 7.5rem;
 }
 
 .todo-list__remove-btn:hover{
@@ -80,6 +81,7 @@
 .todo-list__edit-btn{
     margin: 10px 5px 0;
     color: #069b51;
+    width: 10rem;
 }
 
 .todo-list__edit-btn:hover{

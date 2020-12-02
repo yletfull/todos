@@ -2,9 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import './todo.css';
 import TodoItem from './TodoItem';
+import PopupContext from '../../contexts/popup/PopupContext';
 
 const Todo = (props) => {
-  const { todos, setPopupState } = props;
+  const { todos } = props;
+
+  const setPopupState = React.useContext(PopupContext);
+
   const addTodoHandleClick = () => {
     setPopupState({
       isOpen: true,
@@ -26,7 +30,6 @@ const Todo = (props) => {
 
 Todo.propTypes = {
   todos: propTypes.arrayOf(propTypes.object).isRequired,
-  setPopupState: propTypes.func.isRequired,
 };
 
 export default Todo;

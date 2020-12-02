@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import Todo from './components/todo/Todo';
-// import Todos from './todos.json';
 import TodosContext from './contexts/todos/TodosContext';
+import PopupContext from './contexts/popup/PopupContext';
 import Popup from './components/popup/Popup';
-// JSON.parse(localStorage.getItem('todos'))
+
 function App() {
   const [todos, setTodos] = React.useState(JSON.parse(localStorage.getItem('todos')));
   const [popupState, setPopupState] = React.useState({
@@ -19,16 +20,12 @@ function App() {
     <>
       <Header logoText="Todos list" />
       <TodosContext.Provider value={setTodos}>
-        <Todo
-          todos={todos}
-          setPopupState={setPopupState}
-        />
-        <Popup
-          isOpen={popupState.isOpen}
-          popupName={popupState.popupName}
-          setPopupState={setPopupState}
-          blockBackground
-        />
+        <PopupContext.Provider value={setPopupState}>
+          <Todo
+            todos={todos}
+          />
+          <Popup {...popupState} />
+        </PopupContext.Provider>
       </TodosContext.Provider>
     </>
   );
