@@ -53,7 +53,7 @@ TodoItem.propTypes = {
       propTypes.instanceOf(Date),
       propTypes.string,
     ]).isRequired,
-    id: propTypes.string.isRequired,
+    id: propTypes.number.isRequired,
     text: propTypes.string.isRequired,
   }).isRequired,
 };

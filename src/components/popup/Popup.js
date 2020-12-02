@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
 /* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -9,6 +10,7 @@ import './popup.css';
 import propTypes from 'prop-types';
 import TodosContext from '../../contexts/todos/TodosContext';
 import PopupContext from '../../contexts/popup/PopupContext';
+import formatDate from '../../vendor/formatDate';
 
 const Popup = (props) => {
   const {
@@ -21,18 +23,6 @@ const Popup = (props) => {
     todoText,
     todoDate,
   });
-
-  function formatDate(date) {
-    const d = new Date(date);
-    let month = `${d.getMonth() + 1}`;
-    let day = `${d.getDate()}`;
-    const year = d.getFullYear();
-
-    if (month.length < 2) month = `0${month}`;
-    if (day.length < 2) day = `0${day}`;
-
-    return [year, month, day].join('-');
-  }
 
   useEffect((prev) => {
     setInputsState({
@@ -102,7 +92,6 @@ const Popup = (props) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     validate(e);
   };
 
@@ -112,9 +101,26 @@ const Popup = (props) => {
 
   const addTodoHandler = () => {
     setTodos((prev) => [
+      {
+        text: inputsState.todoText,
+        date: inputsState.todoDate,
+        id: prev.length ? prev[prev.length - 1].id + 1 : 1,
+      },
       ...prev,
-      { text: inputsState.todoText, date: inputsState.todoDate, id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
     ]);
+    closePopup();
+  };
+
+  const editTodoHandler = () => {
+    setTodos((prev) => {
+      const ind = prev.findIndex((el) => el.text === todoText);
+      console.log(ind);
+      prev[ind].text = inputsState.todoText;
+    });
+
+    // { text: inputsState.todoText, date: inputsState.todoDate,
+    //  id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
+
     closePopup();
   };
 
@@ -172,7 +178,7 @@ const Popup = (props) => {
             <p className="popup__input-descriptor">Дата</p>
             <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={inputsState.todoDate} />
             {!inputErrorsState.todoDateErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
-            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState} onClick={addTodoHandler}>Изменить</button>
+            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState} onClick={editTodoHandler}>Изменить</button>
           </form>
         </div>
         )}
