@@ -64,7 +64,6 @@ const Popup = (props) => {
           setValidFields('todoDate',
             new Date(e.target.value));
         }
-        if (e.target.value.length < 1) { setValidFields('todoDate', false); }
         break;
       default:
     }
@@ -92,6 +91,7 @@ const Popup = (props) => {
       ...prev,
       { text: inputsState.todoText, date: inputsState.todoDate, id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
     ]);
+    setInputsState('');
     closePopup();
   };
 
@@ -154,7 +154,7 @@ const Popup = (props) => {
 
 Popup.propTypes = {
   isOpen: propTypes.bool.isRequired,
-  blockBackground: propTypes.bool.isRequired,
+  blockBackground: propTypes.bool,
   popupName: propTypes.string,
   todoText: propTypes.string,
   todoDate: propTypes.instanceOf(Date),

@@ -45,7 +45,10 @@ const TodoItem = (props) => {
 
 TodoItem.propTypes = {
   todo: propTypes.shape({
-    date: propTypes.PropTypes.instanceOf(Date).isRequired,
+    date: propTypes.oneOfType([
+      propTypes.instanceOf(Date),
+      propTypes.string,
+    ]).isRequired,
     id: propTypes.string.isRequired,
     text: propTypes.string.isRequired,
   }).isRequired,
