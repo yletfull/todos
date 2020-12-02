@@ -57,7 +57,14 @@ const Popup = function (props) {
         if (e.target.value.length < 5) { setValidFields('todoText', false); }
         break;
       case 'todoDate':
-        if (e.target.value.length >= 5) { setValidFields('todoDate', e.target.value); }
+        if (e.target.value.length >= 5) {
+          setValidFields('todoDate',
+            new Date(e.target.value).toLocaleString('ru', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }));
+        }
         if (e.target.value.length < 5) { setValidFields('todoDate', false); }
         break;
       default:
@@ -84,7 +91,7 @@ const Popup = function (props) {
   const addTodoHandler = () => {
     setTodos((prev) => [
       ...prev,
-      { text: successValidFields.todoText, date: successValidFields.todoDate, id: prev[prev.length - 1].id + 1 },
+      { text: successValidFields.todoText, date: successValidFields.todoDate, id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
     ]);
     closePopup();
   };
@@ -115,8 +122,8 @@ const Popup = function (props) {
             <p className="popup__input-descriptor">Текст заметки</p>
             <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={(e) => handleChange(e)} />
             {!inputErrorsState.todoTextError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
-            <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoDate" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите дату" onChange={(e) => handleChange(e)} />
+            <p className="popup__input-descriptor">Дата</p>
+            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={(e) => handleChange(e)} />
             {!inputErrorsState.todoDateError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
             <button type="button" className={entryButtonState.entryButton ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Добавить</button>
           </form>
