@@ -7,8 +7,14 @@ import TodoContext from '../../contexts/todos/TodosContext';
 
 const TodoItem = (props) => {
   const { todo } = props;
+
   const setTodos = React.useContext(TodoContext);
+
   const removeHandleClick = () => {
+    setTodos((todos) => todos.filter((t) => t.text !== todo.text));
+  };
+
+  const editHandleClick = () => {
     setTodos((todos) => todos.filter((t) => t.text !== todo.text));
   };
 
@@ -17,6 +23,7 @@ const TodoItem = (props) => {
       <input type="checkbox" id={todo.id} className="todo-list__checkbox" />
       <span className="todo-list__description">{todo.text}</span>
       <p className="todo-list__remove-btn" onClick={removeHandleClick}>Удалить заметку</p>
+      <p className="todo-list__edit-btn" onClick={editHandleClick}>Редактировать заметку</p>
       <span className="todo-list__description_time">{todo.date}</span>
     </label>
   );

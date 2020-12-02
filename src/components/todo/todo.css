@@ -77,6 +77,16 @@
     cursor: pointer;
 }
 
+.todo-list__edit-btn{
+    margin: 10px 5px 0;
+    color: #069b51;
+}
+
+.todo-list__edit-btn:hover{
+    cursor: pointer;
+}
+
+
 .todo-list__button{
     bottom: -3.75rem;
     position: absolute;
