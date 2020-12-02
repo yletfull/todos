@@ -6,9 +6,10 @@ import Todo from './components/todo/Todo';
 import TodosContext from './contexts/todos/TodosContext';
 import PopupContext from './contexts/popup/PopupContext';
 import Popup from './components/popup/Popup';
+import TodosList from './todos.json';
 
 function App() {
-  const [todos, setTodos] = React.useState(JSON.parse(localStorage.getItem('todos')));
+  const [todos, setTodos] = React.useState(localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : TodosList);
   const [popupState, setPopupState] = React.useState({
     isOpen: false,
     popupName: 'addTodo',

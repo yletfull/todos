@@ -30,7 +30,7 @@ const TodoItem = (props) => {
       isOpen: true,
       popupName: 'editTodo',
       todoText: todoTextRef.current.textContent,
-      todoDate: todo.date,
+      todoDate: date,
     });
   };
 

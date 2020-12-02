@@ -22,6 +22,15 @@ const Popup = (props) => {
     todoDate,
   });
 
+  useEffect((prev) => {
+    console.log(todoDate);
+    setInputsState({
+      ...prev,
+      todoText,
+      todoDate: Date(todoDate),
+    });
+  }, [todoText]);
+
   const [inputErrorsState, setInputErrorsState] = useState({
     todoTextErrorShow: false,
     todoDateErrorShow: false,
@@ -94,7 +103,6 @@ const Popup = (props) => {
       ...prev,
       { text: inputsState.todoText, date: inputsState.todoDate, id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
     ]);
-    setInputsState('');
     closePopup();
   };
 
@@ -131,10 +139,10 @@ const Popup = (props) => {
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
             <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" value={inputsState.todoText} onChange={handleChange} />
+            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={inputsState.todoText} />
             {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
-            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" value={inputsState.todoDate} onChange={handleChange} />
+            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={inputsState.todoDate} />
             {!inputErrorsState.todoDateErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
             <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState} onClick={addTodoHandler}>Добавить</button>
           </form>
