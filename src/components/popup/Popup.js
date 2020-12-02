@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -22,48 +23,53 @@ const Popup = (props) => {
   });
 
   const [inputErrorsState, setInputErrorsState] = useState({
-    todoTextError: false,
-    todoDateError: false,
+    todoTextErrorShow: false,
+    todoDateErrorShow: false,
   });
   const [countsInputsInfo, setCountsInputsInfo] = useState({
     requiredInputsCount: 2,
     successInputsCount: 0,
   });
-  const [entryButtonState, setEntryButtonState] = useState({
-    entryButton: false,
-  });
+  const [entryButtonState, setEntryButtonState] = useState(false);
 
   const setTodos = useContext(TodosContext);
 
   const validate = (e) => {
-    const setRequiredInputsCount = (requiredCount) => setCountsInputsInfo((prev) => ({
-      ...prev,
-      requiredInputsCount: Number(requiredCount),
-    }));
-    setRequiredInputsCount(e.target.dataset.inputscount);
+    const validationStateController = (...data) => {
+      const [e, succesValid] = data;
+      const { name } = e.target;
+      const { value } = e.target;
 
-    const setValidFields = (...data) => {
-      const [fieldName, value] = data;
+      const setRequiredInputsCount = (requiredCount) => setCountsInputsInfo((prev) => ({
+        ...prev,
+        requiredInputsCount: Number(requiredCount),
+      }));
+      setRequiredInputsCount(e.target.dataset.inputscount);
+
       setInputsState((prev) => ({
         ...prev,
-        [fieldName]: value,
+        [name]: value,
       }));
 
-      setInputErrorsState((prev) => ({
-        ...prev,
-        [`${fieldName}Error`]: !value,
-      }));
+      if (!succesValid) {
+        setInputErrorsState((prev) => ({
+          ...prev,
+          [`${name}ErrorShow`]: true,
+        }));
+      } else {
+        setInputErrorsState((prev) => ({
+          ...prev,
+          [`${name}ErrorShow`]: false,
+        }));
+      }
     };
 
     switch (e.target.name) {
       case 'todoText':
-        if (e.target.value.length >= 5 && /[а-яёa-zA-Z1-9]/i.test(e.target.value)) { return setValidFields('todoText', e.target.value); }
-        return setValidFields('todoText', false);
+        if (e.target.value.length >= 5 && /[а-яёa-zA-Z1-9]/i.test(e.target.value)) { return validationStateController(e, true); }
+        return validationStateController(e, false);
       case 'todoDate':
-        if (e.target.value.length >= 1) {
-          setValidFields('todoDate',
-            new Date(e.target.value));
-        }
+        validationStateController('todoDate', new Date(e.target.value));
         break;
       default:
     }
@@ -97,19 +103,26 @@ const Popup = (props) => {
 
   useEffect(() => {
     let succesCount = 0;
-    Object.values(inputsState).forEach((el) => {
-      if (Boolean(el) === true) return succesCount += 1;
+    Object.values(inputErrorsState).forEach((errorShow) => {
+      if (!errorShow) return succesCount += 1;
     });
     setCountsInputsInfo((prev) => ({
       ...prev,
       successInputsCount: succesCount,
     }));
-  }, [inputsState]);
+  }, [inputErrorsState]);
 
   useEffect(() => {
     const isValid = countsInputsInfo.successInputsCount === countsInputsInfo.requiredInputsCount;
-    setEntryButtonState({ entryButton: isValid });
+    setEntryButtonState(isValid);
   }, [countsInputsInfo]);
+
+  useEffect(() => {
+    const timer = setTimeout(setEntryButtonState, 0, false);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <div>
@@ -122,11 +135,11 @@ const Popup = (props) => {
           <form className="popup__form">
             <p className="popup__input-descriptor">Текст заметки</p>
             <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} />
-            {!inputErrorsState.todoTextError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
+            {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
             <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} />
-            {!inputErrorsState.todoDateError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
-            <button type="button" className={entryButtonState.entryButton ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Добавить</button>
+            {!inputErrorsState.todoDateErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
+            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Добавить</button>
           </form>
         </div>
         )}
