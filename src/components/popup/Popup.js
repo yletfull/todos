@@ -114,8 +114,9 @@ const Popup = (props) => {
   const editTodoHandler = () => {
     setTodos((prev) => {
       const ind = prev.findIndex((el) => el.text === todoText);
-      console.log(ind);
       prev[ind].text = inputsState.todoText;
+      prev[ind].date = inputsState.todoDate;
+      return prev;
     });
 
     // { text: inputsState.todoText, date: inputsState.todoDate,
