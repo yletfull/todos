@@ -39,18 +39,15 @@ const Popup = (props) => {
       const [e, succesValid] = data;
       const { name } = e.target;
       const { value } = e.target;
-
       const setRequiredInputsCount = (requiredCount) => setCountsInputsInfo((prev) => ({
         ...prev,
         requiredInputsCount: Number(requiredCount),
       }));
       setRequiredInputsCount(e.target.dataset.inputscount);
-
       setInputsState((prev) => ({
         ...prev,
         [name]: value,
       }));
-
       if (!succesValid) {
         setInputErrorsState((prev) => ({
           ...prev,
@@ -69,7 +66,7 @@ const Popup = (props) => {
         if (e.target.value.length >= 5 && /[а-яёa-zA-Z1-9]/i.test(e.target.value)) { return validationStateController(e, true); }
         return validationStateController(e, false);
       case 'todoDate':
-        validationStateController('todoDate', new Date(e.target.value));
+        validationStateController(e, true);
         break;
       default:
     }
@@ -134,12 +131,12 @@ const Popup = (props) => {
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
             <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} />
+            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" value={inputsState.todoText} onChange={handleChange} />
             {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
-            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} />
+            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" value={inputsState.todoDate} onChange={handleChange} />
             {!inputErrorsState.todoDateErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
-            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Добавить</button>
+            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState} onClick={addTodoHandler}>Добавить</button>
           </form>
         </div>
         )}
@@ -150,12 +147,12 @@ const Popup = (props) => {
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
             <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={todoText} />
-            {!inputErrorsState.todoTextError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
+            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={inputsState.todoText} />
+            {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
-            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={todoDate && todoDate} />
-            {!inputErrorsState.todoDateError ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
-            <button type="button" className={entryButtonState.entryButton ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState.entryButton} onClick={addTodoHandler}>Изменить</button>
+            <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={inputsState.todoDate} />
+            {!inputErrorsState.todoDateErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Не выбрана дата</p>}
+            <button type="button" className={entryButtonState ? 'button popup__button popup__button_entry' : 'button popup__button popup__button_disable popup__button_entry'} disabled={!entryButtonState} onClick={addTodoHandler}>Изменить</button>
           </form>
         </div>
         )}

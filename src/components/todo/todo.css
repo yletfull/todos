@@ -20,6 +20,12 @@
     justify-content: center;
 }
 
+.todo-list__label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .todo-list__checkbox{
     position: absolute;
     z-index: -1;
