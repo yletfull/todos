@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -19,6 +20,18 @@ const TodoItem = (props) => {
   const setPopupState = React.useContext(PopupContext);
   const setTodos = React.useContext(TodoContext);
 
+  const checkHandle = (e) => {
+    setTodos((prev) => {
+      const ind = prev.findIndex((el) => el.text === todo.text);
+      prev[ind].checked = e.target.checked;
+      return prev;
+    });
+    setPopupState((prev) => ({
+      ...prev,
+      checked: e.target.checked,
+    }));
+  };
+
   const removeHandleClick = (e) => {
     e.stopPropagation();
     if (confirm('Удалить заметку?')) { setTodos((todos) => todos.filter((t) => t.text !== todo.text)); }
@@ -37,7 +50,7 @@ const TodoItem = (props) => {
   return (
     <div className="todo-list__item">
       <label className="todo-list__label" htmlFor={todo.id}>
-        <input type="checkbox" id={todo.id} className="todo-list__checkbox" />
+        <input type="checkbox" id={todo.id} className="todo-list__checkbox" onChange={checkHandle} checked={todo.checked} />
         <span className="todo-list__description" ref={todoTextRef}>{todo.text}</span>
       </label>
       <p className="todo-list__remove-btn" onClick={removeHandleClick}>Удалить заметку</p>
@@ -55,6 +68,7 @@ TodoItem.propTypes = {
     ]).isRequired,
     id: propTypes.number.isRequired,
     text: propTypes.string.isRequired,
+    checked: propTypes.bool.isRequired,
   }).isRequired,
 };
 

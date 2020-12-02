@@ -104,6 +104,7 @@ const Popup = (props) => {
       {
         text: inputsState.todoText,
         date: inputsState.todoDate,
+        checked: false,
         id: prev.length ? prev[prev.length - 1].id + 1 : 1,
       },
       ...prev,
@@ -118,10 +119,6 @@ const Popup = (props) => {
       prev[ind].date = inputsState.todoDate;
       return prev;
     });
-
-    // { text: inputsState.todoText, date: inputsState.todoDate,
-    //  id: prev.length ? prev[prev.length - 1].id + 1 : '1' },
-
     closePopup();
   };
 
