@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unreachable */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-shadow */
 /* eslint-disable react/require-default-props */
@@ -30,7 +32,7 @@ const Popup = (props) => {
     todoDateErrorShow: false,
   });
   const [countsInputsInfo, setCountsInputsInfo] = useState({
-    requiredInputsCount: 2,
+    requiredInputsCount: 1,
     successInputsCount: 0,
   });
   const [entryButtonState, setEntryButtonState] = useState(false);
@@ -67,8 +69,10 @@ const Popup = (props) => {
         if (e.target.value.length >= 5 && /[а-яёa-zA-Z1-9]/i.test(e.target.value)) { return validationStateController(e, true); }
         return validationStateController(e, false);
       case 'todoDate':
-        validationStateController(e, true);
-        break;
+        return setInputsState((prev) => ({
+          ...prev,
+          todoDate: e.target.value,
+        }));
       default:
     }
   };
