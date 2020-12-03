@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import './filter.css';
@@ -20,14 +21,13 @@ const Filter = (props) => {
 
   React.useEffect(() => {
     setResultTodos(defaultTodos.filter((el) => el.text.indexOf(searchText) !== -1));
-    // if(buttonEnabled.indexOf)
   }, [searchText, defaultTodos, buttonEnabled]);
 
   const handleClick = (e) => {
     if (buttonEnabled.indexOf(e.target.name) !== -1) {
       setButtonsEnabled((prev) => prev.filter((button) => button !== e.target.name));
     } else {
-      setButtonsEnabled((prev) => prev.filter((button) => !button.startsWith(e.target.name)));
+      setButtonsEnabled((prev) => prev.filter((button) => !button.startsWith(e.target.name.slice(0, -1))));
       setButtonsEnabled((prev) => [
         ...prev,
         e.target.name,
