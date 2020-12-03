@@ -6,7 +6,6 @@ import PopupContext from '../../contexts/popup/PopupContext';
 
 const Todo = (props) => {
   const { todos } = props;
-  console.log(todos);
 
   const setPopupState = React.useContext(PopupContext);
 

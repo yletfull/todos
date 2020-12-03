@@ -18,15 +18,18 @@ const Popup = (props) => {
   } = props;
 
   const setPopupState = React.useContext(PopupContext);
+  const setTodos = useContext(TodosContext);
 
   const [inputsState, setInputsState] = useState({
     todoText,
     todoDate,
   });
 
-  useEffect((prev) => {
-    setInputsState({
+  useEffect(() => {
+    setTodos((prev) => [
       ...prev,
+    ]);
+    setInputsState({
       todoText,
       todoDate: formatDate(todoDate),
     });
@@ -41,8 +44,6 @@ const Popup = (props) => {
     successInputsCount: 0,
   });
   const [entryButtonState, setEntryButtonState] = useState(false);
-
-  const setTodos = useContext(TodosContext);
 
   const validate = (e) => {
     const validationStateController = (...data) => {
@@ -105,7 +106,7 @@ const Popup = (props) => {
         text: inputsState.todoText,
         date: inputsState.todoDate,
         checked: false,
-        id: prev.length ? prev[prev.length - 1].id + 1 : 1,
+        id: localStorage.getItem('todos') ? localStorage.getItem('todos').length + 1 : 1,
       },
       ...prev,
     ]);
