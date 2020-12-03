@@ -25,12 +25,19 @@ const Filter = (props) => {
       setResultTodos((prev) => prev.filter((el) => el.checked === true));
     } else if (buttonEnabled.indexOf('completed!') !== -1) {
       setResultTodos((prev) => prev.filter((el) => el.checked === false));
+    } else if (buttonEnabled.indexOf('early') !== -1) {
+      setResultTodos((prev) => prev.sort((a, b) => {
+        if (a.date < b.date) return 1;
+        if (a.date > b.date) return -1;
+        return 0;
+      }));
+    } else if (buttonEnabled.indexOf('early!') !== -1) {
+      setResultTodos((prev) => prev.sort((a, b) => {
+        if (a.date < b.date) return -1;
+        if (a.date > b.date) return 1;
+        return 0;
+      }));
     }
-    // else if (buttonEnabled.indexOf('early') !== -1) {
-    //   setResultTodos((prev) => prev.filter((el) => el.checked === true));
-    // } else if (buttonEnabled.indexOf('early!') !== -1) {
-    //   setResultTodos((prev) => prev.filter((el) => el.checked === true));
-    // }
   }, [searchText, defaultTodos, buttonEnabled]);
 
   const handleClick = (e) => {
