@@ -8,7 +8,7 @@ V 1.0.1
 Список задач
 
 ## 4. Установка  
-`git clone https://github.com/yletfull/spr11 master`
+`git clone https://github.com/yletfull/todos/edit/master todoslist`
 
 ## 5. Подключенные библиотеки  
     "eslint": "^7.14.0",  
