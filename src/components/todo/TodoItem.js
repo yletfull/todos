@@ -26,10 +26,6 @@ const TodoItem = (props) => {
       prev[ind].checked = e.target.checked;
       return prev;
     });
-    setPopupState((prev) => ({
-      ...prev,
-      checked: e.target.checked,
-    }));
   };
 
   const removeHandleClick = (e) => {

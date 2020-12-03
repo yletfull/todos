@@ -25,16 +25,6 @@ const Popup = (props) => {
     todoDate,
   });
 
-  useEffect(() => {
-    setTodos((prev) => [
-      ...prev,
-    ]);
-    setInputsState({
-      todoText,
-      todoDate: formatDate(todoDate),
-    });
-  }, [todoText]);
-
   const [inputErrorsState, setInputErrorsState] = useState({
     todoTextErrorShow: false,
     todoDateErrorShow: false,
@@ -106,7 +96,7 @@ const Popup = (props) => {
         text: inputsState.todoText,
         date: inputsState.todoDate,
         checked: false,
-        id: localStorage.getItem('todos') ? localStorage.getItem('todos').length + 1 : 1,
+        id: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')).length + 1 : 1,
       },
       ...prev,
     ]);
@@ -145,6 +135,13 @@ const Popup = (props) => {
       clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    setInputsState({
+      todoText,
+      todoDate: formatDate(todoDate),
+    });
+  }, [todoText]);
 
   return (
     <div>
