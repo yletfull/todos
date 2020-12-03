@@ -95,15 +95,19 @@ const Popup = (props) => {
   };
 
   const addTodoHandler = () => {
-    setTodos((prev) => [
-      {
-        text: inputsState.todoText,
-        date: inputsState.todoDate,
-        checked: false,
-        id: localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')).length + 1 : 1,
-      },
-      ...prev,
-    ]);
+    setTodos((prev) => {
+      const idArr = prev.map((el) => el.id);
+      const id = Math.max(...idArr, 0) + 1;
+      return [
+        {
+          text: inputsState.todoText,
+          date: inputsState.todoDate,
+          checked: false,
+          id,
+        },
+        ...prev,
+      ];
+    });
     closePopup();
   };
 
