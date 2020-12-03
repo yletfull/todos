@@ -23,7 +23,6 @@
 .filter__button{
     height: 100%;
     background-color: #999797;
-    border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -31,9 +30,11 @@
     display: inline-block;
     font-size: 16px;
 }
+.filter__button:hover{
+    cursor: pointer;
+}
 
-
-.filter__button_active{
+.filter__button_enabled{
     background-color: #4CAF50;
     border: none;
     color: white;

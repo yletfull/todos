@@ -10,7 +10,13 @@ const Filter = (props) => {
   const [defaultTodos, setDefaultTodos] = React.useState(todos);
   const [resultTodos, setResultTodos] = React.useState(todos);
   const [searchText, setSearchText] = React.useState('');
-  const [buttonEnabled, setButtonsEnabled] = React.useState();
+  const [buttonEnabled, setButtonsEnabled] = React.useState([]);
+  const [buttonDisabled, setButtonsDisabled] = React.useState([
+    'completed',
+    'notCompleted',
+    'early',
+    'later',
+  ]);
 
   const mainRef = React.useRef();
 
@@ -20,10 +26,30 @@ const Filter = (props) => {
 
   React.useEffect(() => {
     setResultTodos(defaultTodos.filter((el) => el.text.indexOf(searchText) !== -1));
-  }, [searchText, defaultTodos]);
+    // if(buttonEnabled.indexOf)
+  }, [searchText, defaultTodos, buttonEnabled, buttonDisabled]);
 
   const handleClick = (e) => {
+    if (buttonDisabled.indexOf(e.target.name) !== -1) {
+      setButtonsDisabled((prev) => prev.filter((button) => button !== e.target.name));
+      setButtonsEnabled((prev) => [
+        ...prev,
+        e.target.name,
+      ]);
+    } else {
+      setButtonsEnabled((prev) => prev.filter((button) => button !== e.target.name));
+      setButtonsDisabled((prev) => [
+        ...prev,
+        e.target.name,
+      ]);
+    }
+  };
 
+  const buttonClassConstructor = (btnName) => {
+    if (buttonEnabled.indexOf(btnName) !== -1) {
+      return 'filter__button_enabled';
+    }
+    return '.filter__button';
   };
 
   const handleChange = (e) => {
@@ -34,10 +60,10 @@ const Filter = (props) => {
     <>
       <section className="filter" ref={mainRef}>
         <input className="filter__input" name="filterName" placeholder="По ключевому слову" onChange={handleChange} />
-        <button className="filter__button" type="button" onClick={handleClick} name="completed">Выполненые</button>
-        <button className="filter__button" type="button" onClick={handleClick} name="notCompleted">Не выполненые</button>
-        <button className="filter__button" type="button" onClick={handleClick} name="early">Сначала новые</button>
-        <button className="filter__button" type="button" onClick={handleClick} name="later">Сначала старые</button>
+        <button className={buttonClassConstructor('completed')} type="button" onClick={handleClick} name="completed">Выполненые</button>
+        <button className={buttonClassConstructor('notCompleted')} type="button" onClick={handleClick} name="notCompleted">Не выполненые</button>
+        <button className={buttonClassConstructor('early')} type="button" onClick={handleClick} name="early">Сначала новые</button>
+        <button className={buttonClassConstructor('later')} type="button" onClick={handleClick} name="later">Сначала старые</button>
       </section>
       <Todo todos={resultTodos} />
     </>
