@@ -20,7 +20,10 @@ const Filter = (props) => {
   }, [todos]);
 
   React.useEffect(() => {
-    setResultTodos(defaultTodos.filter((el) => el.text.indexOf(searchText) !== -1));
+    setResultTodos(defaultTodos.filter((el) => el.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1));
+    if (buttonEnabled.indexOf('completed') !== -1) {
+      setResultTodos((prev) => prev.filter((el) => el.checked === true));
+    }
   }, [searchText, defaultTodos, buttonEnabled]);
 
   const handleClick = (e) => {
