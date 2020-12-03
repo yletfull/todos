@@ -26,5 +26,3 @@ V 1.0.1
     "react-scripts": "4.0.1",  
     "web-vitals": "^0.2.4"  
 
-## 6. Github pages  
-[Ссылка](https://github.com/yletfull/todos/) 
