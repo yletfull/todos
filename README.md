@@ -4,9 +4,8 @@ Andrey Korlyakov
 ## 2. Актуальная версия  
 V 1.0.1 
 
-## 3. Описание спринта  
-Продолжение [9-го спртинта](https://github.com/yletfull/spr9/blob/master/README.md) 
-Настройка webpack, для сборки проекта с применением минификации кода и поддержкой старых браузеров.
+## 3. Описание  
+Список задач
 
 ## 4. Установка  
 `git clone https://github.com/yletfull/spr11 master`
