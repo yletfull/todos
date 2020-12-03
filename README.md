@@ -8,7 +8,7 @@ V 1.0.1
 Список задач
 
 ## 4. Установка  
-`git clone https://github.com/yletfull/todos/edit/master todoslist`
+`git clone https://github.com/yletfull/todos.git todos`
 
 ## 5. Подключенные библиотеки  
     "eslint": "^7.14.0",  
