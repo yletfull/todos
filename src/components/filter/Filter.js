@@ -11,12 +11,6 @@ const Filter = (props) => {
   const [resultTodos, setResultTodos] = React.useState(todos);
   const [searchText, setSearchText] = React.useState('');
   const [buttonEnabled, setButtonsEnabled] = React.useState([]);
-  const [buttonDisabled, setButtonsDisabled] = React.useState([
-    'completed',
-    'notCompleted',
-    'early',
-    'later',
-  ]);
 
   const mainRef = React.useRef();
 
@@ -27,18 +21,14 @@ const Filter = (props) => {
   React.useEffect(() => {
     setResultTodos(defaultTodos.filter((el) => el.text.indexOf(searchText) !== -1));
     // if(buttonEnabled.indexOf)
-  }, [searchText, defaultTodos, buttonEnabled, buttonDisabled]);
+  }, [searchText, defaultTodos, buttonEnabled]);
 
   const handleClick = (e) => {
-    if (buttonDisabled.indexOf(e.target.name) !== -1) {
-      setButtonsDisabled((prev) => prev.filter((button) => button !== e.target.name));
-      setButtonsEnabled((prev) => [
-        ...prev,
-        e.target.name,
-      ]);
-    } else {
+    if (buttonEnabled.indexOf(e.target.name) !== -1) {
       setButtonsEnabled((prev) => prev.filter((button) => button !== e.target.name));
-      setButtonsDisabled((prev) => [
+    } else {
+      setButtonsEnabled((prev) => prev.filter((button) => !button.startsWith(e.target.name)));
+      setButtonsEnabled((prev) => [
         ...prev,
         e.target.name,
       ]);
@@ -61,9 +51,9 @@ const Filter = (props) => {
       <section className="filter" ref={mainRef}>
         <input className="filter__input" name="filterName" placeholder="По ключевому слову" onChange={handleChange} />
         <button className={buttonClassConstructor('completed')} type="button" onClick={handleClick} name="completed">Выполненые</button>
-        <button className={buttonClassConstructor('notCompleted')} type="button" onClick={handleClick} name="notCompleted">Не выполненые</button>
+        <button className={buttonClassConstructor('completed!')} type="button" onClick={handleClick} name="completed!">Не выполненые</button>
         <button className={buttonClassConstructor('early')} type="button" onClick={handleClick} name="early">Сначала новые</button>
-        <button className={buttonClassConstructor('later')} type="button" onClick={handleClick} name="later">Сначала старые</button>
+        <button className={buttonClassConstructor('early!')} type="button" onClick={handleClick} name="early!">Сначала старые</button>
       </section>
       <Todo todos={resultTodos} />
     </>
