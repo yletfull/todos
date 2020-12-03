@@ -56,7 +56,7 @@ const Filter = (props) => {
     if (buttonEnabled.indexOf(btnName) !== -1) {
       return 'filter__button_enabled';
     }
-    return '.filter__button';
+    return 'filter__button';
   };
 
   const handleChange = (e) => {

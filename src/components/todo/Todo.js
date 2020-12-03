@@ -18,11 +18,11 @@ const Todo = (props) => {
 
   return (
     <section className="todo">
-      <button type="button" className="todo-list__button" onClick={addTodoHandleClick}>Добавить заметку</button>
+      <button type="button" className="todo-list__add-button" onClick={addTodoHandleClick}>Добавить задачу</button>
       <div className="todo-list">
         {todos.length
           ? todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
-          : <p>Нет заметок</p>}
+          : <p>Нет задач</p>}
       </div>
     </section>
   );

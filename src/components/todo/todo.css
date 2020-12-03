@@ -3,9 +3,9 @@
     display: flex;
     align-items: center;
     border: 1px solid #D1D2D6;
-    width: 95%;
+    width: 100%;
     border-radius: 5px;
-    margin: 50px auto 0;
+    margin: 5px auto 0;
     font-family: 'Oswald-ExtraLight';
 }
 
@@ -95,7 +95,7 @@
 }
 
 
-.todo-list__button{
+.todo-list__add-button{
     bottom: -3.75rem;
     position: absolute;
     background-color: #4CAF50; /* Green */
