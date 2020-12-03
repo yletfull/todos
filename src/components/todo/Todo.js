@@ -22,7 +22,7 @@ const Todo = (props) => {
       <div className="todo-list">
         {todos.length
           ? todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
-          : <p>Нет задач</p>}
+          : <p className="todo-list__epmty-text">Нет задач</p>}
       </div>
     </section>
   );

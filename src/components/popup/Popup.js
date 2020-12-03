@@ -12,7 +12,7 @@ import './popup.css';
 import propTypes from 'prop-types';
 import TodosContext from '../../contexts/todos/TodosContext';
 import PopupContext from '../../contexts/popup/PopupContext';
-import formatDate from '../../vendor/formatDate';
+import formatDate from '../../utils/formatDate';
 
 const Popup = (props) => {
   const {

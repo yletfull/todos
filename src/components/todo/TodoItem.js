@@ -8,6 +8,7 @@ import propTypes from 'prop-types';
 import './todo.css';
 import TodoContext from '../../contexts/todos/TodosContext';
 import PopupContext from '../../contexts/popup/PopupContext';
+import defaultTodosValidator from '../../utils/todosDefaulValidator';
 
 const TodoItem = (props) => {
   const { todo } = props;
@@ -24,6 +25,7 @@ const TodoItem = (props) => {
     setTodos((prev) => {
       const ind = prev.findIndex((el) => el.text === todo.text);
       prev[ind].checked = e.target.checked;
+      prev = defaultTodosValidator(prev);
       return [
         ...prev,
       ];
@@ -32,7 +34,7 @@ const TodoItem = (props) => {
 
   const removeHandleClick = (e) => {
     e.stopPropagation();
-    if (confirm('Удалить задачу?')) { setTodos((todos) => todos.filter((t) => t.text !== todo.text)); }
+    if (confirm('Удалить задачу?')) { setTodos((todos) => todos.filter((t) => t.id !== todo.id)); }
   };
 
   const editHandleClick = (e) => {

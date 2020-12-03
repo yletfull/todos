@@ -11,7 +11,7 @@ const Filter = (props) => {
   const [defaultTodos, setDefaultTodos] = React.useState(todos);
   const [resultTodos, setResultTodos] = React.useState(todos);
   const [searchText, setSearchText] = React.useState('');
-  const [buttonEnabled, setButtonsEnabled] = React.useState([]);
+  const [buttonEnabled, setButtonsEnabled] = React.useState(['early!']);
 
   const mainRef = React.useRef();
 
@@ -69,8 +69,8 @@ const Filter = (props) => {
         <input className="filter__input" name="filterName" placeholder="По ключевому слову" onChange={handleChange} />
         <button className={buttonClassConstructor('completed')} type="button" onClick={handleClick} name="completed">Выполненые</button>
         <button className={buttonClassConstructor('completed!')} type="button" onClick={handleClick} name="completed!">Не выполненые</button>
-        <button className={buttonClassConstructor('early')} type="button" onClick={handleClick} name="early">Сначала новые</button>
-        <button className={buttonClassConstructor('early!')} type="button" onClick={handleClick} name="early!">Сначала старые</button>
+        <button className={buttonClassConstructor('early!')} type="button" onClick={handleClick} name="early!">Сначала ранние</button>
+        <button className={buttonClassConstructor('early')} type="button" onClick={handleClick} name="early">Сначала поздние</button>
       </section>
       <Todo todos={resultTodos} />
     </>
