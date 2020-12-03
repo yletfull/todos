@@ -24,7 +24,9 @@ const TodoItem = (props) => {
     setTodos((prev) => {
       const ind = prev.findIndex((el) => el.text === todo.text);
       prev[ind].checked = e.target.checked;
-      return prev;
+      return [
+        ...prev,
+      ];
     });
   };
 
