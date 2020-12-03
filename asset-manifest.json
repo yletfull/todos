@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/yletfull/todos/static/css/main.fef3a5ee.chunk.css",
-    "main.js": "/yletfull/todos/static/js/main.4222be83.chunk.js",
-    "main.js.map": "/yletfull/todos/static/js/main.4222be83.chunk.js.map",
-    "runtime-main.js": "/yletfull/todos/static/js/runtime-main.0a6eaae6.js",
-    "runtime-main.js.map": "/yletfull/todos/static/js/runtime-main.0a6eaae6.js.map",
-    "static/js/2.f8788e6a.chunk.js": "/yletfull/todos/static/js/2.f8788e6a.chunk.js",
-    "static/js/2.f8788e6a.chunk.js.map": "/yletfull/todos/static/js/2.f8788e6a.chunk.js.map",
-    "index.html": "/yletfull/todos/index.html",
-    "static/css/main.fef3a5ee.chunk.css.map": "/yletfull/todos/static/css/main.fef3a5ee.chunk.css.map",
-    "static/js/2.f8788e6a.chunk.js.LICENSE.txt": "/yletfull/todos/static/js/2.f8788e6a.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/yletfull/todos/static/media/Oswald-ExtraLight.66ed4618.ttf",
-    "static/media/popup.css": "/yletfull/todos/static/media/close.38641781.svg"
+    "main.css": "/yletfull/todos.git/static/css/main.aaf78723.chunk.css",
+    "main.js": "/yletfull/todos.git/static/js/main.5e460285.chunk.js",
+    "main.js.map": "/yletfull/todos.git/static/js/main.5e460285.chunk.js.map",
+    "runtime-main.js": "/yletfull/todos.git/static/js/runtime-main.89c21dc1.js",
+    "runtime-main.js.map": "/yletfull/todos.git/static/js/runtime-main.89c21dc1.js.map",
+    "static/js/2.b7cee9c3.chunk.js": "/yletfull/todos.git/static/js/2.b7cee9c3.chunk.js",
+    "static/js/2.b7cee9c3.chunk.js.map": "/yletfull/todos.git/static/js/2.b7cee9c3.chunk.js.map",
+    "index.html": "/yletfull/todos.git/index.html",
+    "static/css/main.aaf78723.chunk.css.map": "/yletfull/todos.git/static/css/main.aaf78723.chunk.css.map",
+    "static/js/2.b7cee9c3.chunk.js.LICENSE.txt": "/yletfull/todos.git/static/js/2.b7cee9c3.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/yletfull/todos.git/static/media/Oswald-ExtraLight.66ed4618.ttf",
+    "static/media/popup.css": "/yletfull/todos.git/static/media/close.38641781.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0a6eaae6.js",
-    "static/js/2.f8788e6a.chunk.js",
-    "static/css/main.fef3a5ee.chunk.css",
-    "static/js/main.4222be83.chunk.js"
+    "static/js/runtime-main.89c21dc1.js",
+    "static/js/2.b7cee9c3.chunk.js",
+    "static/css/main.aaf78723.chunk.css",
+    "static/js/main.5e460285.chunk.js"
   ]
 }
