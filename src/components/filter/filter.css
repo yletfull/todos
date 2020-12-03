@@ -1,0 +1,10 @@
+
+.filter{
+
+}
+
+.filter__button_active{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+}

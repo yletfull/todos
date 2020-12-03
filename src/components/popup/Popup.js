@@ -151,11 +151,11 @@ const Popup = (props) => {
 
         {popupName === 'addTodo' && (
         <div className="popup__content">
-          <h2 className="popup__title">Добавить заметку</h2>
+          <h2 className="popup__title">Добавить задачу</h2>
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
-            <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={inputsState.todoText} />
+            <p className="popup__input-descriptor">Задача</p>
+            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст задачи" onChange={handleChange} value={inputsState.todoText} />
             {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
             <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={inputsState.todoDate} />
@@ -167,11 +167,11 @@ const Popup = (props) => {
 
         {popupName === 'editTodo' && (
         <div className="popup__content">
-          <h2 className="popup__title">Изменить заметку</h2>
+          <h2 className="popup__title">Редактировать задачу</h2>
           <div className="popup__close" onClick={() => closePopup()} />
           <form className="popup__form">
-            <p className="popup__input-descriptor">Текст заметки</p>
-            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст заметки" onChange={handleChange} value={inputsState.todoText} />
+            <p className="popup__input-descriptor">Задача</p>
+            <input name="todoText" data-inputscount="2" className="input popup__input" type="text" placeholder="Введите текст задачи" onChange={handleChange} value={inputsState.todoText} />
             {!inputErrorsState.todoTextErrorShow ? <p className="popup__input-error popup__input-error_hidden"> </p> : <p className="popup__input-error">Слишком короткий текст</p>}
             <p className="popup__input-descriptor">Дата</p>
             <input name="todoDate" data-inputscount="2" className="input popup__input" type="date" placeholder="Введите дату" onChange={handleChange} value={inputsState.todoDate} />

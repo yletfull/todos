@@ -34,7 +34,7 @@ const TodoItem = (props) => {
 
   const removeHandleClick = (e) => {
     e.stopPropagation();
-    if (confirm('Удалить заметку?')) { setTodos((todos) => todos.filter((t) => t.text !== todo.text)); }
+    if (confirm('Удалить задачу?')) { setTodos((todos) => todos.filter((t) => t.text !== todo.text)); }
   };
 
   const editHandleClick = (e) => {
@@ -53,8 +53,8 @@ const TodoItem = (props) => {
         <input type="checkbox" id={todo.id} className="todo-list__checkbox" onChange={checkHandle} checked={todo.checked} />
         <span className="todo-list__description" ref={todoTextRef}>{todo.text}</span>
       </label>
-      <p className="todo-list__remove-btn" onClick={removeHandleClick}>Удалить заметку</p>
-      <p className="todo-list__edit-btn" onClick={editHandleClick} ref={todoEditRef}>Редактировать заметку</p>
+      <p className="todo-list__remove-btn" onClick={removeHandleClick}>Удалить задачу</p>
+      <p className="todo-list__edit-btn" onClick={editHandleClick} ref={todoEditRef}>Редактировать задачу</p>
       <span className="todo-list__description_time" ref={todoDateRef}>{date.toLocaleString('ru', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
     </div>
   );
